@@ -58,7 +58,11 @@ const plans = [
   },
 ];
 
-export default function PricingSection() {
+interface PricingSectionProps {
+  onAuthClick?: () => void;
+}
+
+export default function PricingSection({ onAuthClick }: PricingSectionProps) {
   return (
     <section className="py-20 bg-[#F8FAFC]" id="harga">
       <div className="max-w-6xl mx-auto px-4">
@@ -108,16 +112,16 @@ export default function PricingSection() {
                 </span>
               </div>
 
-              <a
-                href="#"
-                className={`block text-center font-semibold rounded-xl px-6 py-3 text-sm transition-colors mb-6 ${
+              <button
+                onClick={onAuthClick}
+                className={`block w-full text-center font-semibold rounded-xl px-6 py-3 text-sm transition-colors mb-6 ${
                   plan.highlight
                     ? "bg-white text-blue-600 hover:bg-blue-50"
                     : "bg-blue-600 hover:bg-blue-700 text-white"
                 }`}
               >
                 {plan.cta}
-              </a>
+              </button>
 
               <ul className="space-y-3">
                 {plan.features.map((f, i) => (

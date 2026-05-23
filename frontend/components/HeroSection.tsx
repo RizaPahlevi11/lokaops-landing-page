@@ -80,7 +80,11 @@ function DashboardMockup() {
   );
 }
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  onAuthClick?: () => void;
+}
+
+export default function HeroSection({ onAuthClick }: HeroSectionProps) {
   return (
     <section className="pt-28 pb-20 bg-white" id="hero">
       <div className="max-w-6xl mx-auto px-4">
@@ -102,8 +106,8 @@ export default function HeroSection() {
 
             <div className="flex flex-col sm:flex-row gap-3 mb-6">
               <a
-                href="#"
-                className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-7 py-3.5 transition-colors text-sm"
+                onClick={onAuthClick}
+                className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-7 py-3.5 transition-colors text-sm cursor-pointer"
               >
                 Coba Gratis
                 <ArrowRight size={16} />

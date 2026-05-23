@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
-export default function Navbar() {
+interface NavbarProps {
+  onAuthClick?: () => void;
+}
+
+export default function Navbar({ onAuthClick }: NavbarProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -80,20 +84,20 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          <a
-            href="#"
+          <button
+            onClick={onAuthClick}
             className="text-sm font-medium border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-blue-300 hover:text-blue-600 rounded-xl px-5 py-2.5"
             style={{ transition: "all 0.2s ease" }}
           >
             Masuk
-          </a>
-          <a
-            href="#"
+          </button>
+          <button
+            onClick={onAuthClick}
             className="text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-5 py-2.5 hover:shadow-lg hover:shadow-blue-200 hover:-translate-y-px"
             style={{ transition: "all 0.2s ease" }}
           >
             Coba Gratis
-          </a>
+          </button>
         </div>
 
         <button
@@ -141,20 +145,20 @@ export default function Navbar() {
             </a>
           ))}
           <div className="flex flex-col gap-2 pt-2 border-t border-slate-100">
-            <a
-              href="#"
-              className="text-sm font-medium border border-slate-300 text-slate-700 rounded-xl px-5 py-2.5 text-center hover:border-blue-300 hover:text-blue-600"
+            <button
+              onClick={onAuthClick}
+              className="text-sm font-medium border border-slate-300 text-slate-700 rounded-xl px-5 py-2.5 text-center hover:border-blue-300 hover:text-blue-600 w-full"
               style={{ transition: "all 0.2s ease" }}
             >
               Masuk
-            </a>
-            <a
-              href="#"
-              className="text-sm font-semibold bg-blue-600 text-white rounded-xl px-5 py-2.5 text-center hover:bg-blue-700"
+            </button>
+            <button
+              onClick={onAuthClick}
+              className="text-sm font-semibold bg-blue-600 text-white rounded-xl px-5 py-2.5 text-center hover:bg-blue-700 w-full"
               style={{ transition: "background 0.2s ease" }}
             >
               Coba Gratis
-            </a>
+            </button>
           </div>
         </div>
       </div>

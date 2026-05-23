@@ -1,6 +1,10 @@
 import { ArrowRight, Play } from "lucide-react";
 
-export default function FinalCTA() {
+interface FinalCTAProps {
+  onAuthClick?: () => void;
+}
+
+export default function FinalCTA({ onAuthClick }: FinalCTAProps) {
   return (
     <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-800">
       <div className="max-w-4xl mx-auto px-4 text-center">
@@ -18,13 +22,13 @@ export default function FinalCTA() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-          <a
-            href="#"
+          <button
+            onClick={onAuthClick}
             className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 hover:bg-blue-50 font-bold rounded-xl px-8 py-4 text-base transition-colors shadow-lg"
           >
             Coba LokaOps Gratis
             <ArrowRight size={18} />
-          </a>
+          </button>
           <a
             href="#"
             className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold rounded-xl px-8 py-4 text-base transition-colors"
