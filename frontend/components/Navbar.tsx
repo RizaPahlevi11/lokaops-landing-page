@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "../context/ThemeContext";
 
 interface NavbarProps {
   onAuthClick?: () => void;
 }
 
 export default function Navbar({ onAuthClick }: NavbarProps) {
+  const { resolvedTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -38,11 +41,17 @@ export default function Navbar({ onAuthClick }: NavbarProps) {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: `rgba(255,255,255,${scrolled ? 0.92 : 0})`,
+          background: scrolled
+            ? resolvedTheme === "dark"
+              ? `rgba(3,7,18,${0.92})`
+              : `rgba(255,255,255,${0.92})`
+            : "transparent",
           backdropFilter: scrolled ? "blur(16px) saturate(1.5)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(16px) saturate(1.5)" : "none",
           boxShadow: scrolled
-            ? `0 1px 0 rgba(226,232,240,${opacity}), 0 4px 24px rgba(15,23,42,${opacity * 0.06})`
+            ? resolvedTheme === "dark"
+              ? `0 1px 0 rgba(30,41,59,${opacity}), 0 4px 24px rgba(0,0,0,${opacity * 0.3})`
+              : `0 1px 0 rgba(226,232,240,${opacity}), 0 4px 24px rgba(15,23,42,${opacity * 0.06})`
             : "none",
           transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
@@ -84,6 +93,7 @@ export default function Navbar({ onAuthClick }: NavbarProps) {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           <button
             onClick={onAuthClick}
             className="text-sm font-medium border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-blue-300 hover:text-blue-600 rounded-xl px-5 py-2.5"
@@ -123,10 +133,10 @@ export default function Navbar({ onAuthClick }: NavbarProps) {
           maxHeight: open ? "400px" : "0px",
           opacity: open ? 1 : 0,
           transition: "max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease",
-          background: "rgba(255,255,255,0.97)",
+          background: resolvedTheme === "dark" ? "rgba(3,7,18,0.97)" : "rgba(255,255,255,0.97)",
           backdropFilter: "blur(16px)",
           WebkitBackdropFilter: "blur(16px)",
-          borderTop: open ? "1px solid #e2e8f0" : "none",
+          borderTop: open ? resolvedTheme === "dark" ? "1px solid #1e293b" : "1px solid #e2e8f0" : "none",
         }}
       >
         <div className="px-4 py-4 flex flex-col gap-4">
@@ -144,6 +154,9 @@ export default function Navbar({ onAuthClick }: NavbarProps) {
               {l.label}
             </a>
           ))}
+          <div className="flex items-center justify-end py-2 border-t border-slate-100">
+            <ThemeToggle />
+          </div>
           <div className="flex flex-col gap-2 pt-2 border-t border-slate-100">
             <button
               onClick={onAuthClick}

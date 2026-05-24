@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import ProblemSection from "./components/ProblemSection";
@@ -16,6 +17,14 @@ import AuthPage from "./components/AuthPage";
 type Page = "landing" | "auth";
 
 export default function App() {
+  return (
+    <ThemeProvider>
+      <AppInner />
+    </ThemeProvider>
+  );
+}
+
+function AppInner() {
   const [page, setPage] = useState<Page>("landing");
 
   useEffect(() => {
@@ -41,7 +50,7 @@ export default function App() {
         * { font-family: 'Plus Jakarta Sans', sans-serif; }
         html { scroll-behavior: smooth; }
       `}</style>
-      <div className="bg-[#F8FAFC] text-[#0F172A]">
+      <div className="bg-[#F8FAFC] dark:bg-[#030712] text-[#0F172A] dark:text-[#F8FAFC]">
         <Navbar onAuthClick={() => setPage("auth")} />
         <main>
           <HeroSection onAuthClick={() => setPage("auth")} />

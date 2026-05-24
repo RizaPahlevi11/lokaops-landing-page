@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowLeft, Eye, EyeOff, Bot, Mail, Lock, User, ArrowRight, CheckCircle, Bell, BarChart2 } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 type AuthMode = "login" | "register" | "forgot";
 
@@ -144,6 +145,7 @@ export default function AuthPage({ onBack }: AuthPageProps) {
         fontFamily: "'Plus Jakarta Sans', sans-serif",
       }}
     >
+      <ThemeToggle floating />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         .auth-input::placeholder { color: #475569; }
